@@ -1,1 +1,30 @@
-<p>This is the partial for view 1.</p>
+<div>
+  <p>This is the partial for view 1.</p>
+
+  {{ "stuff to do" + "!" }}
+
+  <ul>
+    <li ng-repeat="note in notes">
+      <p>{{note.info}}</p>
+      <ol>
+        <button ng-click="addPlayer2(note.id, newPlayer)">Add player</button>
+        <li ng-repeat="player in note.players">
+          <p>{{player}}</p>
+        </li>
+      </ol>
+
+    </li>
+  </ul>
+
+  <input ng-model="newPlayer">
+
+  <button ng-click="addPlayer(newPlayer)">Add player</button>
+
+  <ul>
+    <li ng-repeat="file in files">
+      <p>{{file.key}}</p>
+      <p>{{file.value}}</p>
+
+    </li>
+  </ul>
+</div>

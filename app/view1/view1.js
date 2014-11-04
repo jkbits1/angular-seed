@@ -9,6 +9,49 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', [function() {
+.controller('View1Ctrl', ['$scope', '$http', function($scope, $http) {
 
-}]);
+    var req = $http.get('http://localhost:3000');
+
+    req.success(function (data) {
+
+      $scope.files = data.fileEntries;
+    });
+
+    req.error(function (data, status, headers, config) {
+
+      console.log(data);
+      console.log(headers);
+    });
+
+    $scope.notes = [
+      {
+        id: 1,
+        'item': 'one',
+        info: 'first item',
+        players: ['fed', 'djok']
+      },
+      {
+        id: 2,
+        'item': 'two',
+        info: 'second item',
+        players: ['ndl', 'ptro']
+      },
+      {
+        id: 3,
+        'item': 'three',
+        info: 'third item',
+        players: ['tson', 'frer']
+      }
+    ];
+
+    $scope.addPlayer = function(player){
+
+      $scope.notes[1].players.push(player);
+    }
+
+    $scope.addPlayer2 = function(noteItem, player){
+
+      $scope.notes[noteItem-1].players.push(player);
+    }
+  }]);
