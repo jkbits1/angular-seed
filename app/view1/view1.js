@@ -54,4 +54,27 @@ angular.module('myApp.view1', ['ngRoute'])
 
       $scope.notes[noteItem-1].players.push(player);
     }
+
+    $scope.postNote = function() {
+
+      var filesInfo = {
+        folderName: "test",
+        notes:      $scope.notes
+      };
+
+      var post = $http.post('http://localhost:3000/note',
+//        {note: 'note1'}
+        filesInfo
+      );
+
+      post.success(function (data, status, headers, config) {
+
+        console.log(data + ": " + status);
+      });
+
+      post.error(function (data, status, headers, config) {
+
+        console.log(data + ": " + status);
+      });
+    };
   }]);
