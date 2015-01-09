@@ -23,6 +23,11 @@ describe('my app', function() {
         toMatch(/partial for view 1/);
     });
 
+    it('should have an id field for the first file item', function() {
+      expect(element.all(by.css('[data-index-num] p')).first().getText()).
+        toMatch(/one/);
+    });
+
   });
 
 
