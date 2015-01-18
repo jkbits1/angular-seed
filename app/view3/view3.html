@@ -6,19 +6,29 @@
 
 <div class="container">
 
-  <h1>Episode Guide</h1>
+  <h1>Episode Guide <small></small></h1>
+  <!--({{fileName}})-->
+
 
   <br>
+  <div class="row">
+    <!--<div class="col-md-3"><h3>Name:</h3></div>-->
+    <div class="col-md-3 programLabel"><strong>Name:</strong></div>
+    <div class="col-md-2 programName"><h3>{{fileName}}</h3></div>
+    <div class="col-md-7"></div>
+  </div>
+
+
   <div class="row">
     <div class="col-md-3"><strong>Type:</strong></div>
     <div class="col-md-2">TV Program</div>
     <div class="col-md-7"></div>
   </div>
-  <div class="row">
-    <div class="col-md-3"><strong>Name:</strong></div>
-    <div class="col-md-2">{{fileName}}</div>
-    <div class="col-md-7"></div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-md-3"><strong>Name:</strong></div>-->
+    <!--<div class="col-md-2">{{fileName}}</div>-->
+    <!--<div class="col-md-7"></div>-->
+  <!--</div>-->
   <div class="row">
     <div class="col-md-3"><strong>First broadcast:</strong></div>
     <div class="col-md-2">{{getFirstEpisodeDate()}}</div>

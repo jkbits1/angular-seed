@@ -26,9 +26,16 @@ angular.module('myApp.view3', ['ngRoute'])
 //  }
 //});
 
-view3Module.controller('View3Ctrl', ['$scope', '$http', 'filenameService', function($scope, $http, filenameService) {
+view3Module.controller('View3Ctrl', ['$rootScope', '$scope', '$http', 'filenameService', function($rootScope, $scope, $http, filenameService) {
 
-    $http.get('http://localhost:3030')
+  var progIdUriSegment = "";
+
+  if ($rootScope.progId !== undefined) {
+
+    progIdUriSegment = "/" + $rootScope.progId;
+  }
+
+  $http.get('http://localhost:3030' + progIdUriSegment)
       .success(function (data, status, headers, config) {
         $scope.files = data.files;
 
