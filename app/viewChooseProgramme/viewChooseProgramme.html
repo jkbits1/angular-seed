@@ -1,0 +1,27 @@
+choose Programme view
+
+<!--<p>selected path: {{selectedPath}}</p>-->
+<!--<select ng-model="selectedPath">-->
+<!--<option ng-repeat="path in paths" value="{{path}}">{{path}}</option>-->
+<!--</select>-->
+
+<!--<p>selected path2: {{selectedPath2}}</p>-->
+<!--<select ng-model="selectedPath2" ng-options="path for   path in paths">-->
+<!--</select>-->
+
+<p>
+  Selected programme: {{selectedProgramme.name}}
+  <br>
+  Selected programme path: {{selectedProgramme.path}}
+  <br>
+  Selected programme id: {{selectedProgramme.id}}
+</p>
+<select ng-model="selectedProgramme"
+        ng-options="path as path.path for path in paths"
+        ng-change="changeProgramme()">
+</select>
+
+<!--<ul ng-repeat="path in paths">-->
+<!--<li>{{path}}</li>-->
+<!--</ul>-->
+
