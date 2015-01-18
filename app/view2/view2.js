@@ -3,10 +3,20 @@
 var view2Module = angular.module('myApp.view2', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view2', {
-    templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
-  });
+  $routeProvider
+    .when('/view2', {
+      templateUrl: 'view2/view2.html',
+      controller: 'View2Ctrl'
+    })
+    .when('/view2/:progId', {
+      templateUrl: function(params){
+
+        return 'view2/view2.html'
+      }
+      ,
+      controller: 'View2Ctrl'
+    })
+  ;
 }]);
 
 view2Module.factory('filenameService', function () {
@@ -120,62 +130,69 @@ view2Module.factory('filenameService', function () {
 
 });
 
-view2Module.controller('View2Ctrl', ['$scope', '$http', 'filenameService', function($scope, $http, filenameService) {
+view2Module.controller('View2Ctrl', ['$rootScope', '$scope', '$http', '$routeParams', 'filenameService', function($rootScope, $scope, $http, $routeParams, filenameService) {
 
-    $http.get('http://localhost:3030')
-      .success(function (data, status, headers, config) {
-        $scope.files = data.files;
+  var progIdUriSegment = "";
 
-        var monthYears = [];
+  if ($rootScope.progId !== undefined) {
 
-        $scope.fileDates = $scope.files.map(function (file) {
+    progIdUriSegment = "/" + $rootScope.progId;
+  }
 
-          var dateWithoutWeekday = $scope.getDateAsString(file.date);
-          var dateWithoutWeekdayLetters = dateWithoutWeekday.split('');
+  $http.get('http://localhost:3030' + progIdUriSegment)
+    .success(function (data, status, headers, config) {
+      $scope.files = data.files;
 
-          var month = dateWithoutWeekdayLetters.splice(4, 3).join('');
-          // remove space
-          //dateWithoutWeekdayLetters.splice(0, 1);
-          var day = dateWithoutWeekdayLetters.splice(5, 2).join('');
-          var year = dateWithoutWeekdayLetters.splice(6, 4).join('');
+      var monthYears = [];
 
-          var monthInfo = "";
+      $scope.fileDates = $scope.files.map(function (file) {
 
-          if (monthYears[year + month] === undefined) {
+        var dateWithoutWeekday = $scope.getDateAsString(file.date);
+        var dateWithoutWeekdayLetters = dateWithoutWeekday.split('');
 
-            monthYears[year + month] = 1;
+        var month = dateWithoutWeekdayLetters.splice(4, 3).join('');
+        // remove space
+        //dateWithoutWeekdayLetters.splice(0, 1);
+        var day = dateWithoutWeekdayLetters.splice(5, 2).join('');
+        var year = dateWithoutWeekdayLetters.splice(6, 4).join('');
 
-            //monthInfo = year + "&nbsp;&nbsp;&nbsp;&nbsp;" + month;
-            monthInfo = year + "  " + month;
-          }
-          else {
+        var monthInfo = "";
 
-            monthYears[year + month] += 1;
-            //monthInfo = "&nbsp;";
-            monthInfo = "";
-            month = "";
-            year = "";
-          }
+        if (monthYears[year + month] === undefined) {
 
-          return {
-            monthYear: monthInfo,
-            year: year,
-            month: month,
-            day: day
-          }
-        });
+          monthYears[year + month] = 1;
 
-        //var parser = new fileParser($scope.files[0].fileName);
+          //monthInfo = year + "&nbsp;&nbsp;&nbsp;&nbsp;" + month;
+          monthInfo = year + "  " + month;
+        }
+        else {
 
-        $scope.fileName = $scope.getProgramName();
-        //$scope.fileDate = $scope.files[0].date;
+          monthYears[year + month] += 1;
+          //monthInfo = "&nbsp;";
+          monthInfo = "";
+          month = "";
+          year = "";
+        }
 
-    }).error(function(data, status, headers, config) {
+        return {
+          monthYear: monthInfo,
+          year: year,
+          month: month,
+          day: day
+        }
+      });
 
-    });
+      //var parser = new fileParser($scope.files[0].fileName);
 
-    filenameService.setUpScope($scope);
-  }]);
+      $scope.fileName = $scope.getProgramName();
+      //$scope.fileDate = $scope.files[0].date;
+
+  }).error(function(data, status, headers, config) {
+
+  });
+
+  filenameService.setUpScope($scope);
+}]);
 
 function fileParser(file) {
 
