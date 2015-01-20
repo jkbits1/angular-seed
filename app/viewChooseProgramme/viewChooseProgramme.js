@@ -34,8 +34,19 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
 
   $http.get('http://localhost:3030/folders')
     .success(function (data, status, headers, config) {
+
       $scope.paths = data.paths;
 
+      if ($rootScope.progId !== undefined) {
+
+        $scope.paths.forEach(function (path) {
+
+          if (path.id === $rootScope.progId) {
+
+            $scope.selectedProgramme = path;
+          }
+        });
+      }
     }).error(function(data, status, headers, config) {
 
     });
