@@ -47,6 +47,15 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
           }
         });
       }
+      else if ($cookies.selectedProgramme !== undefined) {
+
+        $scope.paths.forEach(function (path) {
+
+          if (path.id === +($cookies.selectedProgramme)) {
+            $scope.selectedProgramme = path;
+          }
+        });
+      }
     }).error(function(data, status, headers, config) {
 
     });
