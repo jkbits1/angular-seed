@@ -4,7 +4,7 @@
 
 'use strict';
 
-var chooseModule = angular.module('myApp.viewChooseProgramme', ['ngRoute']);
+var chooseModule = angular.module('myApp.viewChooseProgramme', ['ngRoute', 'ngCookies']);
 
 chooseModule.config(['$routeProvider', function ($routeProvider) {
 
@@ -23,11 +23,13 @@ chooseModule.config(['$routeProvider', function ($routeProvider) {
 
 }]);
 
-chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http){
+chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http', '$cookies', function ($rootScope, $scope, $http, $cookies){
 
   $scope.changeProgramme = function() {
 
     $rootScope.progId = $scope.selectedProgramme.id;
+
+    $cookies.selectedProgramme = $rootScope.progId;
   };
 
   $http.get('http://localhost:3030/folders')
