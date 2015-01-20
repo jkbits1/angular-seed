@@ -9,10 +9,18 @@ var view3Module =
 angular.module('myApp.view3', ['ngRoute'])
 
   .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/view3', {
-      templateUrl: 'view3/view3.html',
-      controller: 'View3Ctrl'
-    });
+    $routeProvider
+      .when('/view3', {
+        templateUrl: 'view3/view3.html',
+        controller: 'View3Ctrl'
+      })
+      .when('/view3/:progId', {
+        templateUrl: function(params){
+
+          return 'view3/view3.html';
+        },
+        controller: 'View3Ctrl'
+      });
   }]);
 
 // revised to use factory call - maybe Angular upgrade has renamed calls
