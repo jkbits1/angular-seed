@@ -32,10 +32,12 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
     $cookies.selectedProgramme = $rootScope.progId;
   };
 
-  $http.get('http://localhost:3030/folders')
+  //$http.get('http://localhost:3030/folders')
+  $http.get('http://localhost:3030/foldersDb')
     .success(function (data, status, headers, config) {
 
-      $scope.paths = data.paths;
+      //$scope.paths = data.paths;
+      $scope.paths = data;
 
       if ($rootScope.progId !== undefined) {
 
@@ -58,5 +60,6 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
       }
     }).error(function(data, status, headers, config) {
 
+      console.error("no items returned");
     });
 }]);
