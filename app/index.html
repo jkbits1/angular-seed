@@ -21,6 +21,8 @@
   <!--<link href="bootstrap/bootstrap.css" rel="stylesheet">-->
   <link ng-href="{{bootstrap_css}}" rel="stylesheet">
   <!--<link href="bootstrap/docs.css" rel="stylesheet">-->
+  <link ng-href="{{bootstrap_extra_css}}" rel="stylesheet">
+  <link ng-href="{{bootstrap_external_css}}" rel="stylesheet">
   <link ng-href="{{bootstrap_docs_css}}" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -49,40 +51,61 @@
   <!--<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>-->
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2/{{progId}}">view2</a></li>
-    <li><a href="#/view3">view3</a></li>
-    <li><a href="#/chooseProgramme">choose Programme</a></li>
-  </ul>
+  <header>
+    <div class="sidebar-nav">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="menu nav navbar-nav">
+            <li><a href="#/view1">Others</a></li>
+            <li><a href="#/view2/{{progId}}">Alt List</a></li>
+            <li><a href="#/view3">Episode List</a></li>
+            <li><a href="#/chooseProgramme">Choose Programme</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <div class="container-full">
+    <br>
+    <br>
+    <br>
+    <div ng-view></div>
 
-  <!--<select ng-model="indexCss" ng-change="toggleCss()">-->
-    <!--<option value="bootstrap">Bootstrap</option>-->
-    <!--<option value="angular">Angular</option>-->
-  <!--</select>-->
+    <!--<select ng-model="indexCss" ng-change="toggleCss()">-->
+      <!--<option value="bootstrap">Bootstrap</option>-->
+      <!--<option value="angular">Angular</option>-->
+    <!--</select>-->
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-  <select ng-model="selectedCss"
-          ng-options="opt as opt.label for opt in cssOptions"
-          ng-change="toggleCss()">
-  </select>
+    <div class="container">
+    <select ng-model="selectedCss"
+            ng-options="opt as opt.label for opt in cssOptions"
+            ng-change="toggleCss()">
+    </select>
 
-  <div>Angular seed app: v<span app-version></span></div>
+    <div>Angular seed app: v<span app-version></span></div>
+
+    </div>
+  </div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

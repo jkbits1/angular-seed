@@ -20,8 +20,18 @@ myApp
 myApp
   .controller('indexCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 
-    applyBootstrapResources($scope, $sce);
-    //applyAngularResources($scope);
+     applyBootstrapResources($scope, $sce, "mijlo");
+//     applyBootstrapResources($scope, $sce, "mijlo2");
+//      applyBootstrapResources($scope, $sce, "slate");
+
+
+//     applyBootstrapResources($scope, $sce);
+//     applyBootstrapResources($scope, $sce, "landing");
+//     applyBootstrapResources($scope, $sce, "spacelab");
+//    applyBootstrapResources($scope, $sce, "section");
+
+
+//     applyAngularResources($scope);
 
     //$rootScope.progId = 1;
 
@@ -58,7 +68,7 @@ myApp
     };
   }]);
 
-function applyBootstrapResources($scope, $sce) {
+function applyBootstrapResources($scope, $sce, theme) {
 
   ////////////////////
   // bootstrap - start
@@ -69,7 +79,20 @@ function applyBootstrapResources($scope, $sce) {
   //$scope.bower_main_css = "bower_components/html5-boilerplate/css/main.css";
   $scope.bower_main_css = "";
 
-  $scope.bootstrap_css = "bootstrap/bootstrap.css";
+  if (theme !== undefined){
+
+    //$scope.bootstrap_css = "bootstrap/bootstrap-slate.min.css";
+    $scope.bootstrap_css = "bootstrap/bootstrap-" + theme + ".min.css";
+
+    if (theme === "section" || theme === "landing"
+        || theme === "mijlo" || theme === "mijlo2")
+      $scope.bootstrap_extra_css = "bootstrap/styles-" + theme + ".css";
+      $scope.bootstrap_external_css = "bootstrap/external-" + theme + ".css";
+  }
+  else {
+
+    $scope.bootstrap_css = "bootstrap/bootstrap.css";
+  }
   $scope.bootstrap_docs_css = "bootstrap/docs.css";
 
   $scope.html5shiv_js = $sce.trustAsResourceUrl("https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js");
@@ -111,3 +134,6 @@ function applyAngularResources($scope) {
   // angular - end
   //////////////////
 }
+
+//      applyBootstrapResources($scope, $sce, "fluc");
+// applyBootstrapResources($scope, $sce, "leodis");
