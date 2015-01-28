@@ -9,7 +9,11 @@
 <!--</select>-->
 <div class="container">
 
-  <h1>Episode Guide <small>- Choose Programme</small></h1>
+  <div class="headline headline__large">
+    <div class="heading__cell">
+      <h1 class="title">Episode Guide <small>- Choose Programme</small></h1>
+    </div>
+  </div>
   <!--choose Programme view-->
 
   <br>
@@ -30,11 +34,13 @@
 
   <br>
 
-  <select ng-model="selectedProgramme"
-        ng-options="path as path.name for path in paths"
-        ng-change="changeProgramme()">
-  </select>
-  <!--ng-options="path as path.path for path in paths"-->
+  <div class="input-group">
+    <select class="input-lg" ng-model="selectedProgramme"
+          ng-options="path as path.name for path in paths"
+          ng-change="changeProgramme()">
+    </select>
+    <!--ng-options="path as path.path for path in paths"-->
+  </div>
 
   <br>     <br>
 
