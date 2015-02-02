@@ -4,22 +4,22 @@
 
 'use strict';
 
-var view3Module =
+var viewBroadcastsModule =
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.viewBroadcasts', ['ngRoute'])
 
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/view3', {
-        templateUrl: 'view3/view3.html',
-        controller: 'View3Ctrl'
+      .when('/viewBroadcasts', {
+        templateUrl: 'viewBroadcasts/viewBroadcasts.html',
+        controller: 'ViewBroadcastsCtrl'
       })
-      .when('/view3/:progId', {
+      .when('/viewBroadcasts/:progId', {
         templateUrl: function(params){
 
-          return 'view3/view3.html';
+          return 'viewBroadcasts/viewBroadcasts.html';
         },
-        controller: 'View3Ctrl'
+        controller: 'ViewBroadcastsCtrl'
       });
   }]);
 
@@ -34,7 +34,7 @@ angular.module('myApp.view3', ['ngRoute'])
 //  }
 //});
 
-view3Module.controller('View3Ctrl', ['$rootScope', '$scope', '$http', 'filenameService', function($rootScope, $scope, $http, filenameService) {
+viewBroadcastsModule.controller('ViewBroadcastsCtrl', ['$rootScope', '$scope', '$http', 'filenameService', function($rootScope, $scope, $http, filenameService) {
 
   var progIdUriSegment = "";
 
