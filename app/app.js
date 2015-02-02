@@ -20,9 +20,9 @@ myApp
 myApp
   .controller('indexCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 
-     applyBootstrapResources($scope, $sce, "mijlo");
+//      applyBootstrapResources($scope, $sce, "mijlo");
 //     applyBootstrapResources($scope, $sce, "mijlo2");
-//      applyBootstrapResources($scope, $sce, "slate");
+     applyBootstrapResources($scope, $sce, "slate");
 
 
 //     applyBootstrapResources($scope, $sce);
