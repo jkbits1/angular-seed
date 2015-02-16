@@ -27,8 +27,7 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
 
   $scope.changeProgramme = function() {
 
-    $rootScope.progId = $scope.selectedProgramme.id;
-
+    $rootScope.progId          = $scope.selectedProgramme.id;
     $cookies.selectedProgramme = $rootScope.progId;
   };
 
@@ -42,7 +41,6 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
       if ($rootScope.progId !== undefined) {
 
         $scope.paths.forEach(function (path) {
-
           if (path.id === $rootScope.progId) {
 
             $scope.selectedProgramme = path;
@@ -52,8 +50,8 @@ chooseModule.controller('chooseProgrammeCtrl', ['$rootScope', '$scope', '$http',
       else if ($cookies.selectedProgramme !== undefined) {
 
         $scope.paths.forEach(function (path) {
-
           if (path.id === +($cookies.selectedProgramme)) {
+
             $scope.selectedProgramme = path;
           }
         });
