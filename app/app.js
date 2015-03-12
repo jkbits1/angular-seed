@@ -8,27 +8,29 @@ var myApp = angular.module('myApp', [
   'myApp.view2',
   'myApp.viewBroadcasts',
   'myApp.viewChooseProgramme',
-  'myApp.version'
+  'myApp.viewLogin',
+  'myApp.version',
+  'ngCookies'
 ]);
 
 myApp
   .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
-  //$routeProvider.otherwise({redirectTo: '/viewChooseProgramme'});
+    $routeProvider.otherwise({redirectTo: '/view1'});
+    //$routeProvider.otherwise({redirectTo: '/viewChooseProgramme'});
 }]);
 
 myApp
   .controller('indexCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 
-//      applyBootstrapResources($scope, $sce, "mijlo");
+     applyBootstrapResources($scope, $sce, "mijlo");
 //     applyBootstrapResources($scope, $sce, "mijlo2");
-     applyBootstrapResources($scope, $sce, "slate");
+//     applyBootstrapResources($scope, $sce, "slate");
 
 
 //     applyBootstrapResources($scope, $sce);
 //     applyBootstrapResources($scope, $sce, "landing");
 //     applyBootstrapResources($scope, $sce, "spacelab");
-//    applyBootstrapResources($scope, $sce, "section");
+//     applyBootstrapResources($scope, $sce, "section");
 
 
 //     applyAngularResources($scope);
@@ -65,8 +67,20 @@ myApp
         applyAngularResources($scope);
       }
 
+    }
+  }])
+  .factory('AuthService', ['$http', function ($http){
+    return {
+      login: function (credentials) {
+        //return $http.post('/login', credentials);
+        return $http.post('http://localhost:3030/loginClient', credentials);
+      },
+      logout: function () {
+        return $http.get('/api/logout');
+      }
     };
   }]);
+
 
 function applyBootstrapResources($scope, $sce, theme) {
 
@@ -135,5 +149,6 @@ function applyAngularResources($scope) {
   //////////////////
 }
 
+// NOTE: tried out these styles, but didn't work out for misc reasons
 //      applyBootstrapResources($scope, $sce, "fluc");
 // applyBootstrapResources($scope, $sce, "leodis");
