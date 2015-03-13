@@ -34,13 +34,15 @@ angular.module('myApp.viewBroadcasts', ['ngRoute'])
 //  }
 //});
 
-viewBroadcastsModule.controller('ViewBroadcastsCtrl', ['$rootScope', '$scope', '$http', 'filenameService', function($rootScope, $scope, $http, filenameService) {
+viewBroadcastsModule.controller('ViewBroadcastsCtrl', ['$rootScope', '$scope', '$http', '$cookies', 'filenameService', function($rootScope, $scope, $http, $cookies, filenameService) {
 
   var progIdUriSegment = "";
 
   if ($rootScope.progId !== undefined) {
-
     progIdUriSegment = "/" + $rootScope.progId;
+  }
+  else if ($cookies.selectedProgramme !== undefined) {
+    progIdUriSegment = "/" + $cookies.selectedProgramme;
   }
 
   $http.get('http://localhost:3030' + progIdUriSegment)
