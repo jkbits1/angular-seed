@@ -4,6 +4,7 @@
 
 var myApp = angular.module('myApp', [
   'ngRoute',
+  'myApp.directives',
   'myApp.view1',
   'myApp.view2',
   'myApp.viewBroadcasts',
@@ -17,10 +18,29 @@ myApp
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/view1'});
     //$routeProvider.otherwise({redirectTo: '/viewChooseProgramme'});
-}]);
+  }])
+  .directive('adminLogin', [function (){
+  return {
+    controller: function ($scope, $cookies) {
+      $scope.loggedInUser = $cookies.loggedInUser;
+    },
+    templateUrl: 'directives/admin-login.html'
+  };
+  }]);
 
 myApp
-  .controller('indexCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+  .controller('indexCtrl', ['$scope', '$http', '$sce', '$location', 'AuthService', function($scope, $http, $sce, $location, AuthService) {
+
+    $scope.logout = function () {
+
+      AuthService.logout().then(
+        function (){
+          $location.path('/login');
+        }, function (err) {
+          console.log('error logging out');
+        }
+      );
+    };
 
      applyBootstrapResources($scope, $sce, "mijlo");
 //     applyBootstrapResources($scope, $sce, "mijlo2");
