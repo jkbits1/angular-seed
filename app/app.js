@@ -4,7 +4,7 @@
 
 var myApp = angular.module('myApp', [
   'ngRoute',
-  'myApp.directives',
+  //'myApp.directives',
   'myApp.view1',
   'myApp.view2',
   'myApp.viewBroadcasts',
@@ -22,20 +22,27 @@ myApp
   .directive('adminLogin', [function (){
   return {
     controller: function ($scope, $cookies) {
-      $scope.loggedInUser = $cookies.loggedInUser;
+      if ($cookies.loggedInUser != undefined) {
+        $scope.loggedInUser = $cookies.loggedInUser;
+      }
     },
     templateUrl: 'directives/admin-login.html'
   };
   }]);
 
 myApp
-  .controller('indexCtrl', ['$scope', '$http', '$sce', '$location', 'AuthService', function($scope, $http, $sce, $location, AuthService) {
+  .controller('indexCtrl', ['$scope', '$http', '$sce', '$location', 'AuthService', '$cookies', function($scope, $http, $sce, $location, AuthService, $cookies) {
 
     $scope.logout = function () {
 
       AuthService.logout().then(
         function (){
-          $location.path('/login');
+          $location.path('/chooseProgramme');
+
+          // my additions
+          $scope.loggedInUser = false;
+          //$cookies.loggedInUser = undefined;
+          delete $cookies["loggedInUser"];
         }, function (err) {
           console.log('error logging out');
         }
@@ -96,7 +103,8 @@ myApp
         return $http.post('http://localhost:3030/loginClient', credentials);
       },
       logout: function () {
-        return $http.get('/api/logout');
+        //return $http.get('/api/logout');
+        return $http.get('http://localhost:3030/logout');
       }
     };
   }]);
