@@ -16,8 +16,8 @@ var myApp = angular.module('myApp', [
 
 myApp
   .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.otherwise({redirectTo: '/view1'});
-    //$routeProvider.otherwise({redirectTo: '/viewChooseProgramme'});
+    //$routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.otherwise({redirectTo: '/chooseProgramme'});
   }])
   .directive('adminLogin', [function (){
   return {
