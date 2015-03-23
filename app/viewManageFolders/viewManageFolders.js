@@ -19,6 +19,12 @@ manageModule.controller('manageFoldersCtrl', ['$rootScope', '$scope', '$http', f
 
   $scope.folders = []; //[{name: "f1"}, {name: "f2"}];
 
+  $scope.folderInfo = {
+    id: '',
+    name: '',
+    path: ''
+  };
+
   $http.get('http://localhost:3030/foldersDb')
     .success(function (data, status, headers, config) {
       $scope.folders = data;
