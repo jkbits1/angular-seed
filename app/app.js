@@ -10,6 +10,7 @@ var myApp = angular.module('myApp', [
   'myApp.viewBroadcasts',
   'myApp.viewChooseProgramme',
   'myApp.viewLogin',
+  'myApp.viewManageFolders',
   'myApp.version',
   'ngCookies'
 ]);
