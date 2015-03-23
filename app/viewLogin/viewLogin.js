@@ -22,10 +22,15 @@ loginModule.controller('LoginCtrl', ['$scope', '$location', '$window', '$cookies
   $scope.login = function (credentials) {
     AuthService.login(credentials).then(function (res, err) {
         $cookies.loggedInUser = res.data;
+
+        //NOTE: relocate to app-relative href
         //$location.path('/admin/pages');
         //$location.path('/manageFolders');
         //$location.path('/chooseProgramme');
-        $window.location.href = 'http://localhost:3030/manageFolders';
+
+        //NOTE: relocate to non-app href
+        //$window.location.href = 'http://localhost:3030/manageFolders';
+        $location.path('/manageFolders');
       },
       function (err) {
         $log.log(err);
